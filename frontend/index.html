@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AskMyNotes</title>
+    <!-- Tailwind CSS via Play CDN (for rapid styling) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom gradient and glow effects */
+        body {
+            background: radial-gradient(circle at top center, #1e293b, #0f172a);
+        }
+        .glow-border {
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+        .accent-gradient {
+            background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+        }
+    </style>
+</head>
+<body class="min-h-full flex flex-col items-center py-12 px-4 text-slate-200">
+
+    <!-- Header -->
+    <header class="text-center mb-10">
+        <h1 class="text-4xl font-extrabold tracking-tight text-white mb-2">
+            AskMy<span class="text-violet-400">Notes</span>
+        </h1>
+        <p class="text-slate-400 max-w-md mx-auto">
+            Upload a PDF. Ask a question. Get a grounded answer.
+        </p>
+    </header>
+
+    <!-- Main Container (Centered Card) -->
+    <main class="w-full max-w-4xl bg-slate-800/50 backdrop-blur-sm rounded-2xl glow-border p-8 md:p-10">
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            
+            <!-- Left Column: Inputs -->
+            <div class="space-y-8">
+                <!-- Upload Block -->
+                <section>
+                    <label for="pdf-input" class="block text-sm font-medium text-slate-300 mb-3">
+                        Upload your notes (PDF)
+                    </label>
+                    <div class="relative group">
+                        <input type="file" id="pdf-input" accept="application/pdf" 
+                            class="block w-full text-sm text-slate-400
+                            file:mr-4 file:py-2 file:px-4
+                            file:rounded-full file:border-0
+                            file:text-sm file:font-semibold
+                            file:bg-violet-600 file:text-white
+                            hover:file:bg-violet-700
+                            cursor-pointer transition-all">
+                    </div>
+                    <p id="upload-status" class="mt-2 text-xs text-violet-400 italic"></p>
+                </section>
+
+                <!-- Question Block -->
+                <section class="flex flex-col">
+                    <label for="question" class="block text-sm font-medium text-slate-300 mb-3">
+                        Your question
+                    </label>
+                    <textarea id="question" rows="4" 
+                        placeholder="Type your question here..."
+                        class="w-full bg-slate-900 border border-slate-700 rounded-xl p-4 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500 transition-all"></textarea>
+                    
+                    <button id="ask-btn" type="button" 
+                        class="mt-6 accent-gradient hover:opacity-90 text-white font-bold py-3 px-6 rounded-xl shadow-lg transform active:scale-95 transition-all">
+                        Submit Question
+                    </button>
+                    <p id="status" class="mt-3 text-center text-sm text-slate-400"></p>
+                </section>
+            </div>
+
+            <!-- Right Column: Answer Panel -->
+            <section class="border-t md:border-t-0 md:border-l border-slate-700 pt-8 md:pt-0 md:pl-10">
+                <div id="answer-placeholder" class="h-full flex items-center justify-center text-slate-500 border-2 border-dashed border-slate-700 rounded-xl p-6 text-center">
+                    Results will appear here after you submit.
+                </div>
+
+                <div id="answer" hidden class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-xl font-bold text-white">Answer</h2>
+                        <div class="flex gap-2">
+                            <span id="qtype-pill" hidden class="text-[10px] uppercase tracking-wider bg-slate-700 px-2 py-1 rounded-md text-violet-300"></span>
+                            <span id="tool-pill" hidden class="text-[10px] uppercase tracking-wider bg-slate-700 px-2 py-1 rounded-md text-blue-300"></span>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900/80 rounded-xl p-5 border border-slate-700">
+                        <p id="answer-text" class="text-slate-300 leading-relaxed"></p>
+                    </div>
+
+                    <details id="sources" hidden class="group mt-4">
+                        <summary class="list-none cursor-pointer flex items-center text-sm font-medium text-slate-400 hover:text-white transition-colors">
+                            <span class="mr-2 transform group-open:rotate-90 transition-transform">▶</span>
+                            Sources
+                        </summary>
+                        <ul id="sources-list" class="mt-3 space-y-2 text-xs text-slate-500 bg-slate-900/50 rounded-lg p-3"></ul>
+                    </details>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-auto pt-10 text-slate-500 text-sm">
+        <p>Built in the <span class="text-slate-400 font-medium">AI Engineering Bootcamp</span>.</p>
+    </footer>
+
+    <script src="app.js" defer></script>
+</body>
+</html>
