@@ -6,25 +6,25 @@
     <button onclick="changeText()">
       Change Text
       </button>
-    <input type="button" id="button" value="Click Me">  
+      <button id="btn">Click Me</button>
+
+    
+
+
 
     <script>
         function changeText() {
             let element = document.getElementById("demo");
             element.textContent = "Text changed by JavaScript!";
         }
+    const button1 = document.getElementById("btn");
 
-        const button = document.querySelector('#button');
-         button.addEventListener("click", function(event) {
-            // Get mouse coordinates
-            const x = event.clientX;
-            const y = event.clientY;
-
-            // Show alert box
-            alert(`Button clicked at X: ${x}, Y: ${y}`);
-
+        button1.addEventListener("click", function () {
+            console.log("First");
         });
-
+        button1.addEventListener("click", function () {
+            console.log("Second");
+        });
       
     </script>
 </body>

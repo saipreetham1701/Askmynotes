@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AskMyNotes</title>
-    <!-- Tailwind CSS via Play CDN (for rapid styling) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Custom gradient and glow effects */
         body {
             background: radial-gradient(circle at top center, #1e293b, #0f172a);
         }
@@ -22,7 +20,6 @@
 </head>
 <body class="min-h-full flex flex-col items-center py-12 px-4 text-slate-200">
 
-    <!-- Header -->
     <header class="text-center mb-10">
         <h1 class="text-4xl font-extrabold tracking-tight text-white mb-2">
             AskMy<span class="text-violet-400">Notes</span>
@@ -32,14 +29,11 @@
         </p>
     </header>
 
-    <!-- Main Container (Centered Card) -->
     <main class="w-full max-w-4xl bg-slate-800/50 backdrop-blur-sm rounded-2xl glow-border p-8 md:p-10">
-        
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
             
             <!-- Left Column: Inputs -->
             <div class="space-y-8">
-                <!-- Upload Block -->
                 <section>
                     <label for="pdf-input" class="block text-sm font-medium text-slate-300 mb-3">
                         Upload your notes (PDF)
@@ -57,7 +51,6 @@
                     <p id="upload-status" class="mt-2 text-xs text-violet-400 italic"></p>
                 </section>
 
-                <!-- Question Block -->
                 <section class="flex flex-col">
                     <label for="question" class="block text-sm font-medium text-slate-300 mb-3">
                         Your question
@@ -102,15 +95,42 @@
                     </details>
                 </div>
             </section>
-
         </div>
     </main>
 
-    <!-- Footer -->
     <footer class="mt-auto pt-10 text-slate-500 text-sm">
         <p>Built in the <span class="text-slate-400 font-medium">AI Engineering Bootcamp</span>.</p>
     </footer>
 
-    <script src="app.js" defer></script>
+    <!-- LOGIC SCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const askBtn = document.getElementById('ask-btn');
+            const pdfInput = document.getElementById('pdf-input');
+            const statusText = document.getElementById('status');
+            const questionArea = document.getElementById('question');
+
+            askBtn.addEventListener('click', () => {
+                const hasFile = pdfInput.files.length > 0;
+                const hasQuestion = questionArea.value.trim().length > 0;
+
+                if (!hasFile || !hasQuestion) {
+                    // Trigger the JS Popup Error
+                    alert("JavaScript Error: Submission incomplete! You must upload a PDF and type a question.");
+                    
+                    // Update UI for visual feedback
+                    statusText.textContent = "Error: Missing required fields.";
+                    statusText.className = "mt-3 text-center text-sm text-red-400 animate-pulse";
+                    
+                    console.error("Form validation failed.");
+                } else {
+                    // Simulate successful submission
+                    statusText.textContent = "Processing request...";
+                    statusText.className = "mt-3 text-center text-sm text-violet-400";
+                    alert("Success! Your question has been submitted.");
+                }
+            });
+        });
+    </script>
 </body>
 </html>
